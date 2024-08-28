@@ -1,5 +1,3 @@
-# IP Tracking and Geolocation Script
-
 This Python script processes JSON data containing IP addresses, timestamps, and URLs visited by users. It retrieves geolocation information for each IP address and stores the results in a CSV file. This tool is useful for analyzing user locations based on their IP addresses.
 
 ## Features
