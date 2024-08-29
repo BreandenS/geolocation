@@ -1,0 +1,8 @@
+
+# Requirements
+
+- Python 3.x
+- Python libraries:
+  - requests
+  - pandas
+  - json
