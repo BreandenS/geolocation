@@ -1,6 +1,7 @@
 import json
 import requests
 import pandas as pd
+import time
 
 
 def read_json_file_data(file_path):
@@ -11,7 +12,6 @@ def read_json_file_data(file_path):
 
 def get_geolocation(ip_address):
     try:
-
         response = requests.get(f"https://ipinfo.io/{ip_address}/json")
         data = response.json()
 
@@ -31,15 +31,15 @@ def get_geolocation(ip_address):
 
 def load_csv_data(file_path, data):
     df = pd.DataFrame(data)
-
-    df.to_csv(
-        file_path, mode="a", header=not pd.io.common.file_exists(file_path), index=False
-    )
+    df.to_csv(file_path, index=False)
 
 
 def main():
     file_path = "data.json"
-    csv_file_path = "geolocation_data.csv"
+
+    
+    timestamp = time.strftime("%Y%m%d-%H%M%S")
+    csv_file_path = f"geolocation_data_{timestamp}.csv"
 
     data = read_json_file_data(file_path)
 
@@ -49,9 +49,7 @@ def main():
         for item in data:
             ip_address = item.get("ip")
             if ip_address:
-
                 city, region, country, latitude, longitude = get_geolocation(ip_address)
-
                 print(f"IP: {ip_address} - Country: {country}, City: {city}")
 
                 geolocation_data.append(
